@@ -13,14 +13,12 @@ pipeline {
         stage ("build") {
             agent any
             steps {
-                sh 'mvv clean package'
+                sh 'mvv -Dmaven.test.failure.ignore=true install'
             }
-        }
-
-        stage("SonarQube Analysis") {
-            agent any
-            steps {
-                 sh 'mvn sonar:sonar'
+            post {
+                success {
+                    junit 'target/surefire-reports/**/*.xml'
+                }
             }
         }
 
