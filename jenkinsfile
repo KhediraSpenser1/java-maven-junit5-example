@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+    tools {
+        maven 'Maven_3.8.6'
+        jdk 'jdk9'
+    }
+    stages {
+        stage ("checkout github credential"){
+            steps{
+                git branch: 'master', url: ''
+            }
+        }
+        stage ("build") {
+            agent any
+            steps {
+                sh 'mvv clean package'
+            }
+        }
+
+        stage("SonarQube Analysis") {
+            agent any
+            steps {
+                 sh 'mvn sonar:sonar'
+            }
+        }
+
+        stage('Approve Deployment') {
+            agent any
+            input{
+                message "Do you want to proceed for deployment?"
+            }
+            steps {
+                //Add deploy steps & Alerts below
+                sh 'echo "Deploying into Server"'
+            }
+        }
+
+    }
+
+}
