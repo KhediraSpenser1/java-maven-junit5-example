@@ -21,12 +21,6 @@ pipeline {
                 }
             }
         }
-            //Add deploy steps & Alerts below
-                sh 'echo "Deploying into Server"'
-            }
-        }
-
-
         stage('Approve Deployment') {
             agent any
             input{
