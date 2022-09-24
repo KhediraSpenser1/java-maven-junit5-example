@@ -13,7 +13,7 @@ pipeline {
         stage ("build") {
             agent any
             steps {
-                sh 'mvv -Dmaven.test.failure.ignore=true install'
+                sh 'mvn -Dmaven.test.failure.ignore=true install'
             }
             post {
                 success {
