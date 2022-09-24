@@ -21,12 +21,5 @@ pipeline {
                 }
             }
         }
-        stage('Approve Deployment') {
-            agent any
-            input{
-                message "Do you want to proceed for deployment?"
-            }
-            steps {
     }
-
 }
