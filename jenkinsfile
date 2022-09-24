@@ -1,13 +1,13 @@
 pipeline {
     agent any
     tools {
-        maven 'Maven_3.8.6'
-        jdk 'jdk9'
+        maven 'MAVEN'
+        jdk 'JDK'
     }
     stages {
         stage ("checkout github credential"){
             steps{
-                git branch: 'testsast', url: 'https://github.com/KhediraSpenser1/java-maven-junit5-example.git'
+                git branch: 'junitbr', url: 'https://github.com/KhediraSpenser1/java-maven-junit5-example.git'
             }
         }
         stage ("build") {
@@ -21,6 +21,11 @@ pipeline {
                 }
             }
         }
+            //Add deploy steps & Alerts below
+                sh 'echo "Deploying into Server"'
+            }
+        }
+
 
         stage('Approve Deployment') {
             agent any
@@ -28,11 +33,6 @@ pipeline {
                 message "Do you want to proceed for deployment?"
             }
             steps {
-                //Add deploy steps & Alerts below
-                sh 'echo "Deploying into Server"'
-            }
-        }
-
     }
 
 }
