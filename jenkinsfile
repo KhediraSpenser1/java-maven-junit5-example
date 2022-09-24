@@ -6,8 +6,9 @@ pipeline {
     }
     stages {
         stage ("checkout github credential"){
-            steps{
+            steps {
                 git branch: 'junitbr', credentialsId: 'GithubToken', url: 'https://github.com/KhediraSpenser1/java-maven-junit5-example.git'            }
+            }
         }
         stage ("build") {
             agent any
